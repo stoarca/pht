@@ -114,7 +114,7 @@ export const ChromeTabs = memo<ChromeTabsProps>((props) => {
     <div
       ref={ref}
       className="chrome-tabs"
-      style={{ "--tab-content-margin": "9px" }}
+      style={{ "--tab-content-margin": "9px" } as CSSProperties}
     >
       <div className="chrome-tabs-content"></div>
     </div>
