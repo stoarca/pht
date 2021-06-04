@@ -15,7 +15,7 @@ export interface ChromeTabsProps {
     tabs: TabProperties[],
     detail: {
       reason: "close" | "reorder" | "active";
-      tab: CSSProperties;
+      tab: TabProperties;
       originIndex?: number;
       destIndex?: number;
     }
