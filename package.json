@@ -1,6 +1,6 @@
 {
   "name": "@sinm/react-chrome-tabs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Chrome-style tabs in HTML/CSS/JS",
   "main": "dist/index.js",
   "files": [
@@ -25,9 +25,11 @@
   "homepage": "https://github.com/adamschwartz/chrome-tabs#readme",
   "dependencies": {
     "draggabilly": "2.2.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "typescript": "^4.2.4"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
