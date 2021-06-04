@@ -1,5 +1,5 @@
 {
-  "name": "@pansinm/react-chrome-tabs",
+  "name": "@sinm/react-chrome-tabs",
   "version": "1.0.0",
   "description": "Chrome-style tabs in HTML/CSS/JS",
   "main": "dist/index.js",
@@ -41,6 +41,7 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepublishOnly": "tsc"
   }
 }

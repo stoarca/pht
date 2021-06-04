@@ -3,7 +3,7 @@
 ## Usage
 
 ```js
-import ChromeTabs from "@pansinm/react-chrome-tabs";
+import ChromeTabs from "@sinm/react-chrome-tabs";
 
 function YourComponent() {
   const [tabs, setTabs] = useState({ id: "id", title: "title" });
