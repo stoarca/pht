@@ -122,7 +122,7 @@
 
       el.addEventListener('activeTabChange', ({ detail }) => console.log('Active tab changed', detail.tabEl))
       el.addEventListener('tabAdd', ({ detail }) => console.log('Tab added', detail.tabEl))
-      el.addEventListener('tabRemove', ({ detail }) => console.log('Tab removed', detail.tabEl))
+      el.addEventListener('tabRemove', ({ detail }) => console.log('Tab removed', detail))
 
       document.querySelector('button[data-add-tab]').addEventListener('click', _ => {
         chromeTabs.addTab({

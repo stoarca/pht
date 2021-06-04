@@ -1,13 +1,17 @@
-### Chrome Tabs in Chrome
+# React Chrome Tabs
 
-Exactly what you think this is. Go wild.
+## Usage
 
-Drag-and-drop support provided by [Draggabilly](https://github.com/desandro/draggabilly) by @desandro.
+```js
+import ChromeTabs from "@pansinm/react-chrome-tabs";
 
-### [Live demo](http://adamschwartz.co/chrome-tabs/)
-
-<img width=714 src=http://adamschwartz.co/chrome-tabs/chrome-tabs.gif>
-
-<br>
-
-[Older versions](older-versions.md)
+function YourComponent() {
+  const [tabs, setTabs] = useState({ id: "id", title: "title" });
+  return <ChromeTabs onChange={(newTabs, reason) => {
+      if (reason.type === 'close') {
+          // ...
+      }
+      setTabs(newTabs);
+  }}>
+}
+```
