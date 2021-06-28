@@ -29,40 +29,53 @@ const ChromeTabsWrapper = forwardRef<HTMLDivElement, any>((props, ref) => {
 export function useChromeTabs(listeners: Listeners) {
   const ref = useRef<HTMLDivElement>(null);
   const chromeTabsRef = useRef<ChromeTabsClz | null>(null);
-  const listenersRef = useRef<Listeners>(listeners);
-
-  useEffect(() => {
-    listenersRef.current = { ...listeners };
-  }, [listeners.onTabActivated, listeners.onTabClosed, listeners.onTabReorder]);
 
   useEffect(() => {
     const chromeTabs = new ChromeTabsClz();
     chromeTabsRef.current = chromeTabs;
     chromeTabs.init(ref.current as HTMLDivElement);
-    chromeTabs.el.addEventListener("activeTabChange", ({ detail }: any) => {
-      const tabEle = detail.tabEl as HTMLDivElement;
-      const tabId = tabEle.getAttribute(
-        "data-tab-id"
-      ) as string;
-      listenersRef.current.onTabActivated?.(tabId);
-    });
-
-    chromeTabs.el.addEventListener("tabClose", ({ detail }: any) => {
-      const tabEle = detail.tabEl as HTMLDivElement;
-      const tabId = tabEle.getAttribute(
-        "data-tab-id"
-      ) as string;
-      listenersRef.current.onTabClosed?.(tabId);
-    });
-
-    chromeTabs.el.addEventListener("tabReorder", ({ detail }: any) => {
-      const { tabEl: tabEle, originIndex, destinationIndex } = detail;
-      const tabId = tabEle.getAttribute(
-        "data-tab-id"
-      ) as string;
-      listenersRef.current.onTabReorder?.(tabId, originIndex, destinationIndex);
-    });
   }, []);
+
+  // activated
+  useEffect(() => {
+    const listener = ({ detail }: any) => {
+      const tabEle = detail.tabEl as HTMLDivElement;
+      const tabId = tabEle.getAttribute("data-tab-id") as string;
+      listeners.onTabActivated?.(tabId);
+    };
+    const ele = chromeTabsRef.current?.el;
+    ele?.addEventListener("activeTabChange", listener);
+    return () => {
+      ele?.removeEventListener("activeTabChange", listener);
+    };
+  }, [listeners.onTabActivated]);
+
+  useEffect(() => {
+    const ele = chromeTabsRef.current?.el;
+    const listener = ({ detail }: any) => {
+      const { tabEl: tabEle, originIndex, destinationIndex } = detail;
+      const tabId = tabEle.getAttribute("data-tab-id") as string;
+      listeners.onTabReorder?.(tabId, originIndex, destinationIndex);
+    };
+    ele?.addEventListener("tabReorder", listener);
+    return () => {
+      ele?.removeEventListener("tabReorder", listener);
+    };
+  }, [listeners.onTabReorder]);
+
+  useEffect(() => {
+    const ele = chromeTabsRef.current?.el;
+    const listener = ({ detail }: any) => {
+      const tabEle = detail.tabEl as HTMLDivElement;
+      const tabId = tabEle.getAttribute("data-tab-id") as string;
+      listeners.onTabClosed?.(tabId);
+    };
+    ele?.addEventListener("tabClose", listener);
+    return () => {
+      ele?.removeEventListener("tabClose", listener);
+    };
+  }, [listeners.onTabClosed]);
+
 
   const addTab = useCallback((tab: TabProperties) => {
     chromeTabsRef.current?.addTab(tab);
@@ -106,6 +119,6 @@ export function useChromeTabs(listeners: Listeners) {
     addTab,
     updateTab,
     removeTab,
-    activeTab
+    activeTab,
   };
 }
