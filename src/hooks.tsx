@@ -31,7 +31,7 @@ export function useChromeTabs(listeners: Listeners) {
   const chromeTabsRef = useRef<ChromeTabsClz | null>(null);
   const listenersRef = useRef<Listeners>(listeners);
 
-  useCallback(() => {
+  useEffect(() => {
     listenersRef.current = { ...listeners };
   }, [listeners.onTabActivated, listeners.onTabClosed, listeners.onTabReorder]);
 
