@@ -38,7 +38,7 @@ export function Tabs({
 
   useEffect(() => {
     if (!isEqual(tabsRef.current, tabs)) {
-      const retainTabs = tabsRef.current.slice(tabs.length - 1);
+      const retainTabs = tabsRef.current.slice(tabs.length);
       retainTabs.forEach((tab) => {
         removeTab(tab.id);
       });
