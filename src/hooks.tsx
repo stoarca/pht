@@ -40,15 +40,13 @@ export function useChromeTabs(listeners: Listeners) {
   useEffect(() => {
     const listener = ({ detail }: any) => {
       const tabEle = detail.tabEl as HTMLDivElement;
-      if (tabEle !== chromeTabsRef.current?.activeTabEl) {
-        const tabId = tabEle.getAttribute("data-tab-id") as string;
-        listeners.onTabActivated?.(tabId);
-      }
+      const tabId = tabEle.getAttribute("data-tab-id") as string;
+      listeners.onTabActivated?.(tabId);
     };
     const ele = chromeTabsRef.current?.el;
-    ele?.addEventListener("activeTabChange", listener);
+    ele?.addEventListener("tabClick", listener);
     return () => {
-      ele?.removeEventListener("activeTabChange", listener);
+      ele?.removeEventListener("tabClick", listener);
     };
   }, [listeners.onTabActivated]);
 

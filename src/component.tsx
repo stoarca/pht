@@ -24,7 +24,7 @@ export function Tabs({
         tabsRef.current.splice(toIndex, 0, dest);
         onTabReorder?.(tabId, fromIndex, toIndex);
       },
-      onTabActivated: onTabActivated
+      onTabActivated: onTabActivated,
     }
   );
 
@@ -39,10 +39,7 @@ export function Tabs({
         const currentTab = tabsRef.current[index];
         if (!currentTab) {
           addTab(tab);
-        } else if (tab.id === currentTab.id) {
-          updateTab(currentTab.id, tab);
         } else {
-          removeTab(tab.id);
           updateTab(currentTab.id, tab);
         }
       });
