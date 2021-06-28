@@ -17,22 +17,14 @@ export function Tabs({
 
   const { ChromeTabs, addTab, activeTab, removeTab, updateTab } = useChromeTabs(
     {
-      onTabClosed: (tabId) => {
-        tabsRef.current = tabsRef.current.filter((tab) => tab.id !== tabId);
-        onTabClosed?.(tabId);
-      },
+      onTabClosed: onTabClosed,
+      // 这里需要缓存下
       onTabReorder: (tabId, fromIndex, toIndex) => {
         const [dest] = tabsRef.current.splice(fromIndex, 1);
         tabsRef.current.splice(toIndex, 0, dest);
         onTabReorder?.(tabId, fromIndex, toIndex);
       },
-      onTabActivated: (tabId) => {
-        tabsRef.current = tabsRef.current.map((tab) => ({
-          ...tab,
-          active: tab.id === tabId,
-        }));
-        onTabActivated?.(tabId);
-      },
+      onTabActivated: onTabActivated
     }
   );
 

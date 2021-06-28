@@ -247,7 +247,7 @@ class ChromeTabs {
 
   setTabCloseEventListener(tabEl: HTMLElement) {
     tabEl.querySelector(".chrome-tab-close")!.addEventListener("click", (_) => {
-      this.removeTab(tabEl);
+      // this.removeTab(tabEl);
       this.emit("tabClose", { tabEl });
     });
   }
@@ -269,13 +269,13 @@ class ChromeTabs {
   }
 
   removeTab(tabEl: HTMLElement) {
-    if (tabEl === this.activeTabEl) {
-      if (tabEl.nextElementSibling) {
-        this.setCurrentTab(tabEl.nextElementSibling as HTMLElement);
-      } else if (tabEl.previousElementSibling) {
-        this.setCurrentTab(tabEl.previousElementSibling as HTMLElement);
-      }
-    }
+    // if (tabEl === this.activeTabEl) {
+    //   if (tabEl.nextElementSibling) {
+    //     this.setCurrentTab(tabEl.nextElementSibling as HTMLElement);
+    //   } else if (tabEl.previousElementSibling) {
+    //     this.setCurrentTab(tabEl.previousElementSibling as HTMLElement);
+    //   }
+    // }
     tabEl.parentNode!.removeChild(tabEl);
     this.emit("tabRemove", { tabEl });
     this.cleanUpPreviouslyDraggedTabs();
@@ -337,8 +337,8 @@ class ChromeTabs {
       this.draggabillies.push(draggabilly);
 
       draggabilly.on("pointerDown", (_) => {
-        // this.emit("tabClick", { tabEl });
-        this.setCurrentTab(tabEl);
+        this.emit("tabClick", { tabEl });
+        // this.setCurrentTab(tabEl);
       });
 
       draggabilly.on("dragStart", (_) => {
