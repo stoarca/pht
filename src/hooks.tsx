@@ -8,10 +8,10 @@ import React, {
 } from "react";
 import ChromeTabsClz, { TabProperties } from "./chrome-tabs";
 
-type Listeners = {
-  onTabActivated: (tabId: string) => void;
-  onTabClosed: (tabId: string) => void;
-  onTabReorder: (tabId: string, fromIdex: number, toIndex: number) => void;
+export type Listeners = {
+  onTabActivated?: (tabId: string) => void;
+  onTabClosed?: (tabId: string) => void;
+  onTabReorder?: (tabId: string, fromIdex: number, toIndex: number) => void;
 };
 
 const ChromeTabsWrapper = forwardRef<HTMLDivElement, any>((props, ref) => {
@@ -44,7 +44,7 @@ export function useChromeTabs(listeners: Listeners) {
       const tabId = tabEle.getAttribute(
         "data-tab-id"
       ) as string;
-      listenersRef.current.onTabActivated(tabId);
+      listenersRef.current.onTabActivated?.(tabId);
     });
 
     chromeTabs.el.addEventListener("tabClose", ({ detail }: any) => {
@@ -52,7 +52,7 @@ export function useChromeTabs(listeners: Listeners) {
       const tabId = tabEle.getAttribute(
         "data-tab-id"
       ) as string;
-      listenersRef.current.onTabClosed(tabId);
+      listenersRef.current.onTabClosed?.(tabId);
     });
 
     chromeTabs.el.addEventListener("tabReorder", ({ detail }: any) => {
@@ -60,7 +60,7 @@ export function useChromeTabs(listeners: Listeners) {
       const tabId = tabEle.getAttribute(
         "data-tab-id"
       ) as string;
-      listenersRef.current.onTabReorder(tabId, originIndex, destinationIndex);
+      listenersRef.current.onTabReorder?.(tabId, originIndex, destinationIndex);
     });
   }, []);
 
@@ -91,7 +91,9 @@ export function useChromeTabs(listeners: Listeners) {
       `[data-tab-id="${tabId}"]`
     ) as HTMLDivElement;
     if (ele) {
-      chromeTabsRef.current?.updateTab(ele, { ...tab, id: tabId });
+      chromeTabsRef.current?.updateTab(ele, { ...tab });
+    } else {
+      chromeTabsRef.current?.addTab(tab);
     }
   }, []);
 

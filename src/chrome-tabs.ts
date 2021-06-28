@@ -52,6 +52,7 @@ const defaultTapProperties = {
 export type TabProperties = typeof defaultTapProperties & {
   id: string;
   active?: boolean;
+  favicon?: boolean | string;
 };
 
 let instanceId = 0;

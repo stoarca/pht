@@ -2,6 +2,8 @@
 
 ## Usage
 
+1. use hooks
+   
 ```js
 import { useChromeTabs } from "@sinm/react-chrome-tabs";
 
@@ -28,4 +30,11 @@ function Example() {
     </div>
   );
 }
+```
+
+2. use component
+
+```js
+import { Tabs } from '@sinm/react-chrome-tabs';
+<Tabs tabs={tabs} onTabActivated={}>
 ```
