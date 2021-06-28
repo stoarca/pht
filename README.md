@@ -3,15 +3,29 @@
 ## Usage
 
 ```js
-import ChromeTabs from "@sinm/react-chrome-tabs";
+import { useChromeTabs } from "@sinm/react-chrome-tabs";
 
-function YourComponent() {
-  const [tabs, setTabs] = useState({ id: "id", title: "title" });
-  return <ChromeTabs onChange={(newTabs, reason) => {
-      if (reason.type === 'close') {
-          // ...
-      }
-      setTabs(newTabs);
-  }}>
+function Example() {
+  const [tabs, setTabs] = useState([]);
+  const { ChromeTabs, addTab, updateTab, removeTab } = useChromeTabs({
+    onTabActivated: (tabId) => {
+      console.log('active:', tabId);
+    },
+    onTabReorder: (tabId, fromIndex, toIndex) => {},
+    onTabClosed: (tabId) => {
+    },
+  });
+  return (
+    <div>
+      <ChromeTabs />
+      <button
+        onClick={() =>
+          addTab({ id: `id-${Date.now()}`, title: `页签`, favicon: false })
+        }
+      >
+        添加
+      </button>
+    </div>
+  );
 }
 ```

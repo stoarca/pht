@@ -246,8 +246,8 @@ class ChromeTabs {
 
   setTabCloseEventListener(tabEl: HTMLElement) {
     tabEl.querySelector(".chrome-tab-close")!.addEventListener("click", (_) => {
+      this.removeTab(tabEl);
       this.emit("tabClose", { tabEl });
-      // this.removeTab(tabEl);
     });
   }
 
