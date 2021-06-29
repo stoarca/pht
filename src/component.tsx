@@ -40,18 +40,16 @@ export function Tabs({
         if (!currentTab) {
           addTab(tab);
         } else {
-          updateTab(currentTab.id, tab);
+          if (!isEqual(tab, currentTab)) {
+            updateTab(currentTab.id, tab);
+          }
+        }
+        if (tab.active) {
+          activeTab(tab.id);
         }
       });
-
-      tabs
-        .filter((tab) => tab.active)
-        .forEach((tab) => {
-          activeTab(tab.id);
-        });
-
-      tabsRef.current = tabs;
     }
+    tabsRef.current = tabs;
   }, [tabs]);
   return <ChromeTabs />;
 }
