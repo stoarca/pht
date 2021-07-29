@@ -347,12 +347,14 @@ class ChromeTabs {
         this.draggabillyDragging = draggabilly;
         tabEl.classList.add("chrome-tab-is-dragging");
         this.el.classList.add("chrome-tabs-is-sorting");
+        this.emit('dragStart', {});
       });
 
       draggabilly.on("dragEnd", (_) => {
         this.isDragging = false;
         const finalTranslateX = parseFloat(tabEl.style.left);
         tabEl.style.transform = `translate3d(0, 0, 0)`;
+        this.emit('dragEnd', {});
 
         // Animate dragged tab back into its place
         requestAnimationFrame((_) => {

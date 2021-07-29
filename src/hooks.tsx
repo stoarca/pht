@@ -12,6 +12,8 @@ export type Listeners = {
   onTabActivated?: (tabId: string) => void;
   onTabClosed?: (tabId: string) => void;
   onTabReorder?: (tabId: string, fromIdex: number, toIndex: number) => void;
+  onDragBegin?: () => void;
+  onDragEnd?: () => void;
 };
 
 const ChromeTabsWrapper = forwardRef<HTMLDivElement, any>((props, ref) => {
@@ -75,6 +77,28 @@ export function useChromeTabs(listeners: Listeners) {
       ele?.removeEventListener("tabClose", listener);
     };
   }, [listeners.onTabClosed]);
+
+  useEffect(() => {
+    const listener = () => {
+      listeners.onDragBegin?.();
+    };
+    const ele = chromeTabsRef.current?.el;
+    ele?.addEventListener("dragBegin", listener);
+    return () => {
+      ele?.removeEventListener("dragBegin", listener);
+    };
+  }, [listeners.onDragBegin]);
+
+  useEffect(() => {
+    const listener = () => {
+      listeners.onDragEnd?.();
+    };
+    const ele = chromeTabsRef.current?.el;
+    ele?.addEventListener("dragEnd", listener);
+    return () => {
+      ele?.removeEventListener("dragEnd", listener);
+    };
+  }, [listeners.onDragEnd]);
 
   const addTab = useCallback((tab: TabProperties) => {
     chromeTabsRef.current?.addTab(tab);

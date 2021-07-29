@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Listeners, useChromeTabs } from "./hooks";
 import isEqual from "lodash.isequal";
 import { TabProperties } from "./chrome-tabs";
@@ -14,6 +14,7 @@ export function Tabs({
   onTabReorder,
 }: TabsProps) {
   const tabsRef = useRef<TabProperties[]>([]);
+  const moveIndex = useRef({ tabId: "", fromIndex: -1, toIndex: -1 });
 
   const { ChromeTabs, addTab, activeTab, removeTab, updateTab } = useChromeTabs(
     {
@@ -22,9 +23,23 @@ export function Tabs({
       onTabReorder: (tabId, fromIndex, toIndex) => {
         const [dest] = tabsRef.current.splice(fromIndex, 1);
         tabsRef.current.splice(toIndex, 0, dest);
-        onTabReorder?.(tabId, fromIndex, toIndex);
+        const beforeFromIndex = moveIndex.current.fromIndex;
+        moveIndex.current = {
+          tabId,
+          fromIndex: beforeFromIndex > -1 ? beforeFromIndex : fromIndex,
+          toIndex,
+        };
       },
       onTabActivated: onTabActivated,
+      onDragEnd: () => {
+        const { tabId, fromIndex, toIndex } = moveIndex.current;
+        onTabReorder?.(tabId, fromIndex, toIndex);
+        moveIndex.current = {
+          tabId: "",
+          fromIndex: -1,
+          toIndex: -1,
+        };
+      },
     }
   );
 
