@@ -33,7 +33,9 @@ export function Tabs({
       onTabActivated: onTabActivated,
       onDragEnd: () => {
         const { tabId, fromIndex, toIndex } = moveIndex.current;
-        onTabReorder?.(tabId, fromIndex, toIndex);
+        if (fromIndex > -1) {
+          onTabReorder?.(tabId, fromIndex, toIndex);
+        }
         moveIndex.current = {
           tabId: "",
           fromIndex: -1,
