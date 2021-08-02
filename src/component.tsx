@@ -65,6 +65,9 @@ export function Tabs({
             updateTab(currentTab.id, tab);
           }
         }
+      });
+
+      (tabs as TabProperties[]).forEach((tab) => {
         if (tab.active) {
           activeTab(tab.id);
         }

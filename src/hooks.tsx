@@ -131,7 +131,7 @@ export function useChromeTabs(listeners: Listeners) {
     const ele = ref.current?.querySelector(
       `[data-tab-id="${tabId}"]`
     ) as HTMLDivElement;
-    if (ele) {
+    if (ele !== chromeTabsRef.current?.activeTabEl) {
       chromeTabsRef.current?.setCurrentTab(ele);
     }
   }, []);
