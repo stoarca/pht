@@ -14,6 +14,7 @@ export type Listeners = {
   onTabReorder?: (tabId: string, fromIdex: number, toIndex: number) => void;
   onDragBegin?: () => void;
   onDragEnd?: () => void;
+  onContextMenu?:(tabId: string, event: MouseEvent) => void;
 };
 
 const ChromeTabsWrapper = forwardRef<HTMLDivElement, any>((props, ref) => {
@@ -88,6 +89,19 @@ export function useChromeTabs(listeners: Listeners) {
       ele?.removeEventListener("dragBegin", listener);
     };
   }, [listeners.onDragBegin]);
+
+  useEffect(() => {
+    const ele = chromeTabsRef.current?.el;
+    const listener = ({ detail }: any) => {
+      const tabEle = detail.tabEl as HTMLDivElement;
+      const tabId = tabEle.getAttribute("data-tab-id") as string;
+      listeners.onContextMenu?.(tabId, detail.event);
+    };
+    ele?.addEventListener("contextmenu", listener);
+    return () => {
+      ele?.removeEventListener("contextmenu", listener);
+    };
+  }, [listeners.onContextMenu]);
 
   useEffect(() => {
     const listener = () => {

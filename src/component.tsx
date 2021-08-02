@@ -12,36 +12,40 @@ export function Tabs({
   onTabActivated,
   onTabClosed,
   onTabReorder,
+  onContextMenu,
 }: TabsProps) {
   const tabsRef = useRef<TabProperties[]>([]);
   const moveIndex = useRef({ tabId: "", fromIndex: -1, toIndex: -1 });
 
+  const handleTabReorder = useCallback((tabId, fromIndex, toIndex) => {
+    const [dest] = tabsRef.current.splice(fromIndex, 1);
+    tabsRef.current.splice(toIndex, 0, dest);
+    const beforeFromIndex = moveIndex.current.fromIndex;
+    moveIndex.current = {
+      tabId,
+      fromIndex: beforeFromIndex > -1 ? beforeFromIndex : fromIndex,
+      toIndex,
+    };
+  }, []);
+  const handleDragEnd = useCallback(() => {
+    const { tabId, fromIndex, toIndex } = moveIndex.current;
+    if (fromIndex > -1) {
+      onTabReorder?.(tabId, fromIndex, toIndex);
+    }
+    moveIndex.current = {
+      tabId: "",
+      fromIndex: -1,
+      toIndex: -1,
+    };
+  }, [onTabReorder]);
+
   const { ChromeTabs, addTab, activeTab, removeTab, updateTab } = useChromeTabs(
     {
-      onTabClosed: onTabClosed,
-      // 这里需要缓存下
-      onTabReorder: (tabId, fromIndex, toIndex) => {
-        const [dest] = tabsRef.current.splice(fromIndex, 1);
-        tabsRef.current.splice(toIndex, 0, dest);
-        const beforeFromIndex = moveIndex.current.fromIndex;
-        moveIndex.current = {
-          tabId,
-          fromIndex: beforeFromIndex > -1 ? beforeFromIndex : fromIndex,
-          toIndex,
-        };
-      },
-      onTabActivated: onTabActivated,
-      onDragEnd: () => {
-        const { tabId, fromIndex, toIndex } = moveIndex.current;
-        if (fromIndex > -1) {
-          onTabReorder?.(tabId, fromIndex, toIndex);
-        }
-        moveIndex.current = {
-          tabId: "",
-          fromIndex: -1,
-          toIndex: -1,
-        };
-      },
+      onTabClosed,
+      onTabActivated,
+      onContextMenu,
+      onDragEnd: handleDragEnd,
+      onTabReorder: handleTabReorder,
     }
   );
 
