@@ -5,7 +5,7 @@
 1. use hooks
    
 ```js
-import { useChromeTabs } from "@sinm/react-chrome-tabs";
+import { useChromeTabs } from "react-chrome-tabs";
 
 function Example() {
   const [tabs, setTabs] = useState([]);
@@ -25,7 +25,7 @@ function Example() {
           addTab({ id: `id-${Date.now()}`, title: `页签`, favicon: false })
         }
       >
-        添加
+        New tab
       </button>
     </div>
   );
@@ -35,6 +35,6 @@ function Example() {
 2. use component
 
 ```js
-import { Tabs } from '@sinm/react-chrome-tabs';
+import { Tabs } from 'react-chrome-tabs';
 <Tabs tabs={tabs} onTabActivated={}>
 ```

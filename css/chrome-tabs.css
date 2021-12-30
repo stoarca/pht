@@ -3,20 +3,56 @@
   position: relative;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 12px;
-  height: 46px;
+  height: 42px;
   padding: 8px 3px 4px 3px;
-  background: #dee1e6;
+  background: #d5d9dc;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
+  display: flex;
 }
 .chrome-tabs * {
   box-sizing: inherit;
   font: inherit;
 }
+.chrome-tabs .new-tab-button-wrapper {
+  display: inline-flex;
+  align-items: center;
+  background: inherit;
+  pointer-events: auto;
+  height: 100%;
+  width: 80px;
+  position: relative;
+  z-index: 5;
+  border-radius: 17px;
+  pointer-events: auto;
+  transition: padding 0.35s;
+}
+.chrome-tabs .new-tab-button-wrapper .new-tab-button {
+  height: 24px;
+  width: 24px;
+  line-height: 0;
+  border-radius: 50%;
+  padding: 4px;
+  border: none;
+  background: none;
+  color: #555;
+  box-shadow: none;
+  transition: background 0.35s;
+  cursor: default;
+  margin-top: 3px;
+}
+.chrome-tabs .new-tab-button-wrapper .new-tab-button svg {
+  pointer-events: none;
+  fill: #222;
+}
+.chrome-tabs .new-tab-button-wrapper .new-tab-button:hover {
+  background: rgba(150,150,150,0.25);
+}
 .chrome-tabs .chrome-tabs-content {
   position: relative;
-  width: 100%;
+  width: auto;
   height: 100%;
+  margin-right: 5px;
 }
 .chrome-tabs .chrome-tab {
   position: absolute;
@@ -63,8 +99,7 @@
 .chrome-tabs .chrome-tab .chrome-tab-dividers::after {
   right: 0;
 }
-.chrome-tabs .chrome-tab:first-child .chrome-tab-dividers::before,
-.chrome-tabs .chrome-tab:last-child .chrome-tab-dividers::after {
+.chrome-tabs .chrome-tab:first-child .chrome-tab-dividers::before {
   opacity: 0;
 }
 .chrome-tabs .chrome-tab .chrome-tab-background {
@@ -81,13 +116,13 @@
   height: 100%;
 }
 .chrome-tabs .chrome-tab .chrome-tab-background > svg .chrome-tab-geometry {
-  fill: #f4f5f6;
+  fill: #e2e4e6;
 }
 .chrome-tabs .chrome-tab[active] {
   z-index: 5;
 }
 .chrome-tabs .chrome-tab[active] .chrome-tab-background > svg .chrome-tab-geometry {
-  fill: #fff;
+  fill: #f3f3f3;
 }
 .chrome-tabs .chrome-tab:not([active]) .chrome-tab-background {
   transition: opacity 0.2s ease;
@@ -143,6 +178,7 @@
 }
 .chrome-tabs .chrome-tab .chrome-tab-title {
   flex: 1;
+  line-height: 18px; /* chrome-tab height - 2 * chrome-tab-content padding */
   vertical-align: top;
   overflow: hidden;
   white-space: nowrap;

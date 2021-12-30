@@ -1,5 +1,5 @@
 {
-  "name": "@sinm/react-chrome-tabs",
+  "name": "react-chrome-tabs",
   "version": "1.2.12",
   "description": "Chrome-style tabs in HTML/CSS/JS",
   "main": "dist/index.js",
@@ -10,19 +10,19 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adamschwartz/chrome-tabs.git"
+    "url": "git+https://github.com/stoarca/react-chrome-tabs.git"
   },
   "keywords": [
     "chrome",
     "tabs",
     "html"
   ],
-  "author": "Adam Schwartz",
+  "author": "ParseHub",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/adamschwartz/chrome-tabs/issues"
+    "url": "https://github.com/stoarca/react-chrome-tabs/issues"
   },
-  "homepage": "https://github.com/adamschwartz/chrome-tabs#readme",
+  "homepage": "https://github.com/stoarca/react-chrome-tabs#readme",
   "dependencies": {
     "draggabilly": "2.2.0",
     "lodash.isequal": "^4.5.0",
