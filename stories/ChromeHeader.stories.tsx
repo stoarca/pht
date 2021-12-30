@@ -1,19 +1,14 @@
 import { Story } from "@storybook/react";
 import "../css/chrome-tabs.css";
 
-import { Tabs, TabsProps } from "../src/index";
+import { ChromeHeader } from "../src/index";
 
 export default {
-  title: "Example/ChromeTabs",
-  component: Tabs,
+  title: "Example/ChromeHeader",
+  component: ChromeHeader,
 };
 
-const Template: Story<TabsProps> = (args) => {
-  return <Tabs {...args} />;
-};
-
-export const BasicExample = Template.bind({});
-
+export const BasicExample = (args) => { return <ChromeHeader {...args}/>; };
 BasicExample.args = {
   tabs: [{
     id: "1",

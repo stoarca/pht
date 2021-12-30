@@ -1,7 +1,7 @@
 {
-  "name": "react-chrome-tabs",
-  "version": "1.2.12",
-  "description": "Chrome-style tabs in HTML/CSS/JS",
+  "name": "pht",
+  "version": "1.0.0",
+  "description": "PHT",
   "main": "dist/index.js",
   "files": [
     "README.md",
@@ -10,19 +10,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stoarca/react-chrome-tabs.git"
+    "url": "git+https://github.com/stoarca/pht.git"
   },
-  "keywords": [
-    "chrome",
-    "tabs",
-    "html"
-  ],
   "author": "ParseHub",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/stoarca/react-chrome-tabs/issues"
-  },
-  "homepage": "https://github.com/stoarca/react-chrome-tabs#readme",
   "dependencies": {
     "draggabilly": "2.2.0",
     "lodash.isequal": "^4.5.0",

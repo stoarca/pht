@@ -63,6 +63,7 @@
   margin: 0;
   z-index: 1;
   pointer-events: none;
+  font-size: 14px;
 }
 .chrome-tabs .chrome-tab,
 .chrome-tabs .chrome-tab * {
@@ -186,6 +187,7 @@
   color: #5f6368;
   -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 24px), transparent);
   mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 24px), transparent);
+  margin-top: -1px;
 }
 .chrome-tabs .chrome-tab[is-small] .chrome-tab-title {
   margin-left: 0;
@@ -296,4 +298,72 @@
   .chrome-tabs-optional-shadow-below-bottom-bar {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2' height='2' viewBox='0 0 2 2'><rect x='0' y='0' width='2' height='1' fill='rgba(0, 0, 0, .27)'></rect></svg>");
   }
+}
+
+
+.chrome-nav {
+  background: #f3f3f3;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  display: flex;
+}
+
+.chrome-nav .nav-button {
+  margin: 0 5px;
+  width: 28px;
+  height: 28px;
+  padding: 2px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.chrome-nav .nav-button * {
+  pointer-events: none;
+}
+
+.chrome-nav .nav-button:hover {
+  background: #d5d9dc;
+}
+
+.chrome-nav .nav-aligner {
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.chrome-nav .nav-button.forward {
+  transform: scale(-1, 1);
+}
+
+.chrome-nav .nav-button.reload {
+  padding: 6px;
+}
+
+.chrome-nav .urlbar-wrapper {
+  flex: 1;
+  position: relative;
+  margin-left: 10px;
+}
+
+.chrome-nav .urlbar {
+  display: inline-block;
+  vertical-align: middle;
+  height: 30px;
+  width: 100%;
+  border: 0;
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  padding: 0 10px;
+}
+
+.chrome-nav .urlbar:focus {
+  outline: 2px solid #bbb;
 }
